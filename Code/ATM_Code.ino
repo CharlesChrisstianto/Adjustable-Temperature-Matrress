@@ -1,4 +1,4 @@
-
+//Define Libary
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 #include <WiFi.h>
@@ -8,11 +8,11 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 
+//Index CountDown timer
+CountDown CD(CountDown::MINUTES); // jangan lupa ubah ke MINUTES dengan variable
 
-CountDown CD(CountDown::MINUTES); // jangan lupa ubah ke MINUTES dengan variable 
-
+//Index untuk Timer server
 const long  utcOffsetInSeconds = 25200;
-
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", utcOffsetInSeconds);
 
@@ -47,7 +47,6 @@ int bt2 = 0;
 int bt3 = 0;
 int bt4 = 0;
 
-
 //Starting Temperature Val for setting
 int  settingTime_default = 15; //minutes
 int  settingTime_user = 15; //minutes
@@ -58,15 +57,16 @@ int wake_up_time_min_default = 0;
 int wake_up_time_jam_user = wake_up_time_jam_default;
 int wake_up_time_min_user = wake_up_time_min_default;
 
-const char* ssid = "BSQ";
+const char* ssid = "BSQ"; //Password WIFI
 const char* password = "Admin456";
 
-char* level = "none";
+char* level = "none"; //Level Temperature
 int limit_temp;
+
 LiquidCrystal_I2C lcd(0x27,20,4);  // set the LCD address to 0x27 (SDA and SCL pin) for a 16 chars and 2 line display
 
 
-void initWiFi() {
+void initWiFi() { //connect wifi fuction
   lcd.setCursor(0,0);
   lcd.print(" Connecting to Wifi");
   WiFi.mode(WIFI_STA);
@@ -102,7 +102,7 @@ void cold_mode(int settingTime_user){
     digitalWrite(relay_3, LOW);
 }
 
-void count_minutes(){
+void count_minutes(){ 
 settingTime_user = settingTime_user - 1;
 Serial.println("masuk");
 //if(time_s<0){time_s=59; time_m = time_m-1;}
