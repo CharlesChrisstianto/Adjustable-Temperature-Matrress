@@ -7,6 +7,9 @@
 #include "CountDown.h"
 #include <NTPClient.h>
 #include <WiFiUdp.h>
+#include <SoftwareSerial.h>
+
+SoftwareSerial mySerial(3, 2); //HC-05 Tx & Rx is connected to Arduino #3 & #2
 
 //Index CountDown timer
 CountDown CD(CountDown::MINUTES); // jangan lupa ubah ke MINUTES dengan variable
@@ -81,32 +84,14 @@ void initWiFi() { //connect wifi fuction
   Serial.println(WiFi.localIP());
 }
 
-
-void cold_mode(int settingTime_user){
-
-  lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.print("      Cold Mode");
-          
-  lcd.setCursor(0,1);
-  lcd.print("Time Left:");
-
-  while (CD.remaining() > 0){
-    digitalWrite(relay_1, HIGH);
-    digitalWrite(relay_3, HIGH);
-    lcd.setCursor(10,1);
-    lcd.print(CD.remaining());
-    lcd.print(" \'  ");
+void bt_data(){
+  if(Serial.available()) 
+  {
+     char* txt = mySerial.read());//Forward what Serial received to Software Serial Port
+     if(txt == ) 
   }
-    digitalWrite(relay_1, LOW);
-    digitalWrite(relay_3, LOW);
-}
 
-void count_minutes(){ 
-settingTime_user = settingTime_user - 1;
-Serial.println("masuk");
-//if(time_s<0){time_s=59; time_m = time_m-1;}
-//if(time_m<0){time_m=59; time_h = time_h-1;}
+  
 }
 
 
@@ -497,6 +482,7 @@ menu10: // hot Mode
 void setup() {
 
   Serial.begin(115200);
+  mySerial.begin(9600);//Begin serial communication with Arduino and HC-05
 
   pinMode(relay_1, OUTPUT);
   pinMode(relay_2, OUTPUT);
