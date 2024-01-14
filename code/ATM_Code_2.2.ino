@@ -445,9 +445,9 @@ menu9: // cold Mode
           back = digitalRead(pb_4);
           
           if (ok == LOW) {delay(300); goto menu5; }
-          if (up == LOW) { delay(50); level = "LOW"; limit_temp = 18; }
+          if (up == LOW) { delay(50); level = "LOW"; limit_temp = 15; }
           if (down == LOW) { delay(50); level = "MID"; limit_temp = 20;}
-          if (back == LOW) { delay(300); level = "HIGH"; limit_temp = 22; }
+          if (back == LOW) { delay(300); level = "HIGH"; limit_temp = 25; }
           }
 
 menu10: // hot Mode
@@ -475,9 +475,9 @@ menu10: // hot Mode
           back = digitalRead(pb_4);
           
           if (ok == LOW) {delay(300); goto menu6; }
-          if (up == LOW) { delay(50); level = "LOW"; limit_temp = 26; }
-          if (down == LOW) { delay(50); level = "MID"; limit_temp = 28;}
-          if (back == LOW) { delay(300); level = "HIGH"; limit_temp = 30; }
+          if (up == LOW) { delay(50); level = "LOW"; limit_temp = 38; }
+          if (down == LOW) { delay(50); level = "MID"; limit_temp = 45;}
+          if (back == LOW) { delay(300); level = "HIGH"; limit_temp = 50; }
           }
 
 
@@ -507,6 +507,7 @@ void setup() {
 
   delay(1000);
   menu();
+
 }
 
 
